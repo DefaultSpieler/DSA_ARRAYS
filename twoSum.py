@@ -3,7 +3,9 @@
 arr = [2,4,-3,7,8,5]
 target = 15
 
-# brute force - 2 loops - time complexity - O(n^2) space complexity - O(1)
+# brute force 2 loops 
+# time complexity - O(n^2) 
+# space complexity - O(1)
 
 def BruteForce(arr, target):
 
@@ -12,20 +14,49 @@ def BruteForce(arr, target):
 			if arr[i] + arr[j] == target:
 				return [i, j]
 
-#print(BruteForce(arr, target))
+print(BruteForce(arr, target))
+
+
+
+# using hashTable 
+# time complexity - O(n)
+# space complexity - O(n)
 
 def usingDic(arr, target):
-	hashDic = { }
-	for i in range(len(arr)):
-		hashDic[arr[i]] = i
+	hashDic = {}
 
-	for i, val in enumerate(hashDic):
-
-		toFind = target - val
+	for num in arr:
+		toFind = target - num
 
 		if toFind in hashDic:
-			print(i)
-	
+			return toFind, num
+		else:
+			hashDic[num] = True
 
-usingDic(arr, target)
+
+print(usingDic(arr, target))
+
+
+
+# sort to min-max
+# time complexity - O(nlog(n))
+# space complexity - O(1)
+
+def sortAndDone(arr, target):
+	arr.sort()
+	minVal = 0
+	maxVal = len(arr) - 1
+
+	while minVal < maxVal:
+		if arr[minVal] + arr[maxVal] == target:
+			return minVal, maxVal
+		elif arr[minVal] + arr[maxVal] > target:
+			maxVal -= 1
+		elif arr[minVal] + arr[maxVal] < target:
+			minVal += 1
+	return []
+
+print(sortAndDone(arr, target))
+
+
 
